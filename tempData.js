@@ -2,7 +2,7 @@
 
 export default tempData = [
   {
-    name: "Elf-Ceyda Ile  Yapılacaklar",
+    name: "With Elif Ceyda",
     color: "#24A6D9",
     todos: [
       {
