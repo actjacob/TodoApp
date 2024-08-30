@@ -1,18 +1,42 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Modal,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "./Colors";
 import tempData from "./tempData";
 import TodoList from "./components/TodoList";
+import AddListModal from "./components/AddListModal";
+
 {
   /* <Text>Starting to Build a Todo App for My Personal Vlog</Text>; */
 }
 
 export default class App extends React.Component {
+  state = {
+    addTodoVisible: true,
+  };
+
+  toggleAddTodoModal() {
+    this.setState({ addTodoVisible: !this.state.addTodoVisible });
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <Modal
+          animationType="slide"
+          visible={this.state.addTodoVisible}
+          onRequestClose={() => this.toggleAddTodoModal()}
+        >
+          <AddListModal closeModal={() => this.toggleAddTodoModal()} />
+        </Modal>
         <View style={{ flexDirection: "row" }}>
           <View style={styles.divider} />
           <Text style={styles.title}>
@@ -23,13 +47,22 @@ export default class App extends React.Component {
           <View style={styles.divider} />
         </View>
         <View style={{ marginVertical: 48 }}>
-          <TouchableOpacity style={styles.addlist}>
+          <TouchableOpacity
+            style={styles.addlist}
+            onPress={() => this.toggleAddTodoModal()}
+          >
             <AntDesign name="plus" size={16} color={colors.blue}></AntDesign>
           </TouchableOpacity>
           <Text style={styles.add}>Add List</Text>
         </View>
         <View style={{ height: 275, paddingLeft: 32 }}>
-          <FlatList data={tempData} keyExtractor={(item) => item.name} horizontal={true} showsHorizontalScrollIndicator={false} renderItem={({ item }) => <TodoList list={item} />} />
+          <FlatList
+            data={tempData}
+            keyExtractor={(item) => item.name}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => <TodoList list={item} />}
+          />
         </View>
       </View>
     );
