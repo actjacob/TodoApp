@@ -12,8 +12,10 @@
     "@expo/vector-icons": "^14.0.2",
     "expo": "~51.0.28",
     "expo-status-bar": "~1.12.1",
+    "ionicons": "^7.4.0",
     "react": "18.2.0",
-    "react-native": "0.74.5"
+    "react-native": "0.74.5",
+    "react-native-svg": "^15.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
