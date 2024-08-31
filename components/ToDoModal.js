@@ -11,13 +11,10 @@ import {
 } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Colors from "../Colors";
-import Svg, { Path } from "react-native-svg";
 
 export default class ToDoModal extends React.Component {
   state = {
-    name: this.props.list.name,
-    color: this.props.list.color,
-    todos: this.props.list.todos,
+    newTodo: "",
   };
 
   renderTodo = (todo) => {
@@ -48,10 +45,9 @@ export default class ToDoModal extends React.Component {
   };
 
   render() {
-    const taskCount = this.state.todos.length;
-    const completedCount = this.state.todos.filter(
-      (todo) => todo.completed
-    ).length;
+    const list = this.props.list;
+    const taskCount = list.todos.length;
+    const completedCount = list.todos.filter((todo) => todo.completed).length;
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity

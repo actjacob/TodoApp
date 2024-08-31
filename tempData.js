@@ -6,19 +6,20 @@ export default tempData = [
     color: "#24A6D9",
     todos: [
       {
-        title: "Book Flight",
+        title: "Bayılmadan Gün tamamlanacak",
         completed: false,
       },
       {
-        title: "Passport Check",
+        title: "Sadece Kafası olan koyuna kanal Tedavisi yapılacak",
         completed: true,
       },
       {
-        title: "Reserve Hotel Room",
+        title: "2 Litre Kahve İçilecek",
         completed: true,
       },
       {
-        title: "Pack Luggage",
+        title:
+          "Gece yatmadan kolektif bilince inan bir beyfendi ile konuşulacak",
         completed: false,
       },
     ],
