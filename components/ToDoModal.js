@@ -8,6 +8,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   TextInput,
+  Keyboard,
 } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Colors from "../Colors";
@@ -30,6 +31,8 @@ export default class ToDoModal extends React.Component {
 
     this.props.updateList(list);
     this.setState({ newTodo: "" });
+
+    Keyboard.dismiss();
   };
 
   renderTodo = (todo, index) => {
@@ -105,6 +108,7 @@ export default class ToDoModal extends React.Component {
             <TextInput
               style={[styles.input, { borderColor: list.color }]}
               onChangeText={(text) => this.setState({ newTodo: text })}
+              value={this.state.newTodo}
             />
             <TouchableOpacity
               style={[styles.addTodo, { backgroundColor: list.color }]}
