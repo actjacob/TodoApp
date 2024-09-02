@@ -49,6 +49,8 @@ export default class ToDoModal extends React.Component {
     const taskCount = list.todos.length;
     const completedCount = list.todos.filter((todo) => todo.completed).length;
     return (
+      // <KeyboardAvoidingView style={{flex:1}} />
+
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
           style={{ position: "absolute", top: 64, right: 32, zIndex: 10 }}
@@ -61,11 +63,11 @@ export default class ToDoModal extends React.Component {
           style={[
             styles.section,
             styles.header,
-            { borderBottomColor: this.state.color },
+            { borderBottomColor: list.color },
           ]}
         >
           <View>
-            <Text style={styles.title}> {this.state.name} </Text>
+            <Text style={styles.title}> {list.name} </Text>
             <Text style={styles.taskCount}>
               {completedCount} of {taskCount} tasks{" "}
             </Text>
@@ -74,7 +76,7 @@ export default class ToDoModal extends React.Component {
 
         <View style={[styles.section, { flex: 3 }]}>
           <FlatList
-            data={this.state.todos}
+            data={list.todos}
             renderItem={({ item }) => this.renderTodo(item)}
             keyExtractor={(item) => item.title}
             contentContainerStyle={{
@@ -85,19 +87,14 @@ export default class ToDoModal extends React.Component {
           />
         </View>
 
-        <KeyboardAvoidingView
-          style={[styles.section, styles.footer]}
-          behavior="padding"
-        >
-          <TextInput
-            style={[styles.input, { borderColor: this.state.color }]}
-          />
+        <View style={[styles.section, styles.footer]}>
+          <TextInput style={[styles.input, { borderColor: list.color }]} />
           <TouchableOpacity
-            style={[styles.addTodo, { backgroundColor: this.state.color }]}
+            style={[styles.addTodo, { backgroundColor: list.color }]}
           >
             <AntDesign name="plus" size={16} color={colors.white} />
           </TouchableOpacity>
-        </KeyboardAvoidingView>
+        </View>
       </SafeAreaView>
     );
   }

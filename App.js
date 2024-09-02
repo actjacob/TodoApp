@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     paddingHorizontal: 64,
   },
-  addlist: {
+  addList: {
     borderWidth: 2,
     borderColor: colors.lightBlue,
     borderRadius: 4,
