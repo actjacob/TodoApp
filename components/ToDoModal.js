@@ -53,48 +53,46 @@ export default class ToDoModal extends React.Component {
     const taskCount = list.todos.length;
     const completedCount = list.todos.filter((todo) => todo.completed).length;
     return (
-      <Background>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-          <SafeAreaView style={styles.container}>
-            <TouchableOpacity style={{ position: "absolute", top: 64, right: 32, zIndex: 10 }} onPress={this.props.closeModal}>
-              <AntDesign name="close" size={24} color={Colors.black}></AntDesign>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+        <SafeAreaView style={styles.container}>
+          <TouchableOpacity style={{ position: "absolute", top: 64, right: 32, zIndex: 10 }} onPress={this.props.closeModal}>
+            <AntDesign name="close" size={24} color={Colors.black}></AntDesign>
+          </TouchableOpacity>
+
+          <View style={[styles.section, styles.header, { borderBottomColor: list.color }]}>
+            <View>
+              <Text style={styles.title}> {list.name} </Text>
+              <Text style={styles.taskCount}>
+                {completedCount} of {taskCount} tasks{" "}
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.section, { flex: 3 }]}>
+            <FlatList
+              data={list.todos}
+              renderItem={({ item, index }) => this.renderTodo(item, index)}
+              keyExtractor={(item) => item.title}
+              contentContainerStyle={{
+                paddingHorizontal: 32,
+                paddingVertical: 64,
+              }}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+
+          <View style={[styles.section, styles.footer]}>
+            <TextInput
+              style={[styles.input, { borderColor: list.color }]}
+              onChangeText={(text) => this.setState({ newTodo: text })}
+              value={this.state.newTodo}
+            />
+            <TouchableOpacity style={[styles.addTodo, { backgroundColor: list.color }]} onPress={() => this.addTodo()}>
+              <AntDesign name="plus" size={16} color={colors.white} />
             </TouchableOpacity>
-
-            <View style={[styles.section, styles.header, { borderBottomColor: list.color }]}>
-              <View>
-                <Text style={styles.title}> {list.name} </Text>
-                <Text style={styles.taskCount}>
-                  {completedCount} of {taskCount} tasks{" "}
-                </Text>
-              </View>
-            </View>
-
-            <View style={[styles.section, { flex: 3 }]}>
-              <FlatList
-                data={list.todos}
-                renderItem={({ item, index }) => this.renderTodo(item, index)}
-                keyExtractor={(item) => item.title}
-                contentContainerStyle={{
-                  paddingHorizontal: 32,
-                  paddingVertical: 64,
-                }}
-                showsVerticalScrollIndicator={false}
-              />
-            </View>
-
-            <View style={[styles.section, styles.footer]}>
-              <TextInput
-                style={[styles.input, { borderColor: list.color }]}
-                onChangeText={(text) => this.setState({ newTodo: text })}
-                value={this.state.newTodo}
-              />
-              <TouchableOpacity style={[styles.addTodo, { backgroundColor: list.color }]} onPress={() => this.addTodo()}>
-                <AntDesign name="plus" size={16} color={colors.white} />
-              </TouchableOpacity>
-            </View>
-          </SafeAreaView>
-        </KeyboardAvoidingView>
-      </Background>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

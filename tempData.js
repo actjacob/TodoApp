@@ -3,23 +3,23 @@
 export default tempData = [
   {
     id: 1,
-    name: "With  Ceyda",
+    name: "Plan a Trip",
     color: "#24A6D9",
     todos: [
       {
-        title: "Bayılmadan Gün tamamlanacak",
+        title: "Book Flight",
         completed: false,
       },
       {
-        title: "Sadece Kafası olan koyuna kanal Tedavisi yapılacak",
+        title: "Passport Check",
         completed: true,
       },
       {
-        title: "2 Litre Kahve İçilecek",
+        title: "Reserve Hotel Room",
         completed: true,
       },
       {
-        title: "Gece yatmadan kolektif bilince inan bir beyfendi ile konuşulacak",
+        title: "Pack Luggage",
         completed: false,
       },
     ],
