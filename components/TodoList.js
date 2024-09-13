@@ -10,11 +10,12 @@ export default class TodoList extends React.Component {
   };
 
   toggleListModal() {
-    this.setState({ showListVisible: !this.state.showListVisible });
+    this.setState((prevState) => ({ showListVisible: !this.state.showListVisible }));
   }
 
   render() {
-    const list = this.props.list;
+    const { list, updateList } = this.props;
+    // const list = this.props.list;
 
     const completedCount = list.todos.filter((todo) => todo.completed).length;
     const remainingCount = list.todos.length - completedCount;

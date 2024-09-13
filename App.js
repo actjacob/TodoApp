@@ -1,27 +1,24 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "./Colors";
 import tempData from "./tempData";
 import TodoList from "./components/TodoList";
 import AddListModal from "./components/AddListModal";
-import TodoManage from "./screen/TodoManage";
-import Fire1 from "./Fire1";
+import Fire from "./Fire";
 
 export default class App extends React.Component {
   state = {
     addTodoVisible: false,
-    lists: tempData,
+    lists: [],
     user: {},
     loading: true,
   };
 
   componentDidMount() {
-    firebase = new Fire1((error, user) => {
+    firebase = new Fire((error, user) => {
       if (error) {
-        return alert("hello");
-        ("");
+        return alert("Uh oh,something went wrong");
       }
 
       this.setState({ user });
@@ -53,8 +50,6 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar style="auto" backgroundColor={this.state.color} />
-        {/* <TodoManage></TodoManage> */}
         <Modal animationType="slide" visible={this.state.addTodoVisible} onRequestClose={() => this.toggleAddTodoModal()}>
           <AddListModal closeModal={() => this.toggleAddTodoModal()} addList={this.addList} />
         </Modal>

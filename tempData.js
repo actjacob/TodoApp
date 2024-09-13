@@ -3,7 +3,7 @@
 export default tempData = [
   {
     id: 1,
-    name: "With Elif Ceyda",
+    name: "With  Ceyda",
     color: "#24A6D9",
     todos: [
       {
@@ -19,8 +19,7 @@ export default tempData = [
         completed: true,
       },
       {
-        title:
-          "Gece yatmadan kolektif bilince inan bir beyfendi ile konuşulacak",
+        title: "Gece yatmadan kolektif bilince inan bir beyfendi ile konuşulacak",
         completed: false,
       },
     ],

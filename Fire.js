@@ -1,8 +1,8 @@
-// import   firebase from "firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 import "@firebase/firestore";
-import { getApps, initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import getLists from "firebase/database";
+import { onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA9xl6NBNcirYbYEnVbnLYUSerD37lAnkk",
@@ -13,10 +13,6 @@ const firebaseConfig = {
   messagingSenderId: "631333258609",
   appId: "1:631333258609:web:eec92067c3fd771173a2d0",
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
 
 class Fire {
   constructor(callback) {
@@ -40,21 +36,6 @@ class Fire {
           });
       }
     });
-
-    // onAuthStateChanged(auth, (user) => {
-    //   if (user) {
-    //     console.log("User is signed in:", user);
-    //   } else {
-    //     // Anonim olarak oturum aç
-    //     signInAnonymously(auth)
-    //       .then(() => {
-    //         console.log("Signed in anonymously");
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error signing in anonymously:", error);
-    //       });
-    //   }
-    // });
   }
 }
 
