@@ -1,5 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal, ActivityIndicator } from "react-native";
+import "react-native-gesture-handler";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Modal,
+  ActivityIndicator,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "./Colors";
 import tempData from "./tempData";
@@ -19,7 +28,7 @@ export default class App extends React.Component {
         return alert("Uh oh,something went wrong");
       }
 
-      firebase.getLists((list) => {
+      firebase.getLists((lists) => {
         this.setState({ lists, user }, () => {
           this.setState({ loading: false });
         });
@@ -41,17 +50,26 @@ export default class App extends React.Component {
   };
 
   addList = (list) => {
-    this.setState({
-      lists: [...this.state.lists, { ...list, id: this.state.lists.length + 1, todos: [] }],
+    // this.setState({
+    //   lists: [
+    //     ...this.state.lists,
+    //     { ...list, id: this.state.lists.length + 1, todos: [] },
+    //   ],
+    // });
+    firebase.addlist({
+      name: list.name,
+      color: list.color,
+      todos: [],
     });
   };
 
   updateList = (list) => {
-    this.setState({
-      lists: this.state.lists.map((item) => {
-        return item.id === list.id ? list : item;
-      }),
-    });
+    // this.setState({
+    //   lists: this.state.lists.map((item) => {
+    //     return item.id === list.id ? list : item;
+    //   }),
+    // });
+    firebase.updateList(list);
   };
 
   render() {
@@ -64,10 +82,19 @@ export default class App extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <Modal animationType="slide" visible={this.state.addTodoVisible} onRequestClose={() => this.toggleAddTodoModal()}>
-          <AddListModal closeModal={() => this.toggleAddTodoModal()} addList={this.addList} />
+        <Modal
+          animationType="slide"
+          visible={this.state.addTodoVisible}
+          onRequestClose={() => this.toggleAddTodoModal()}
+        >
+          <AddListModal
+            closeModal={() => this.toggleAddTodoModal()}
+            addList={this.addList}
+          />
         </Modal>
-        <View>{/* <Text>User:{this.state.user.uid} </Text> */}</View>
+        <View>
+          <Text>User:{this.state.user.uid} </Text>
+        </View>
         <View style={{ flexDirection: "row" }}>
           <View style={styles.divider} />
           <Text style={styles.title}>
@@ -78,7 +105,10 @@ export default class App extends React.Component {
           <View style={styles.divider} />
         </View>
         <View style={{ marginVertical: 48 }}>
-          <TouchableOpacity style={styles.addList} onPress={() => this.toggleAddTodoModal()}>
+          <TouchableOpacity
+            style={styles.addList}
+            onPress={() => this.toggleAddTodoModal()}
+          >
             <AntDesign name="plus" size={16} color={colors.blue}></AntDesign>
           </TouchableOpacity>
           <Text style={styles.add}>Add List</Text>
