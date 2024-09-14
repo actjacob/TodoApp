@@ -22,24 +22,24 @@ export default class App extends React.Component {
     lists: tempData,
   };
 
-  componentDidMount() {
-    firebase = new Fire((error, user) => {
-      if (error) {
-        return alert("Uh oh,something went wrong");
-      }
+  // componentDidMount() {
+  //   firebase = new Fire((error, user) => {
+  //     if (error) {
+  //       return alert("Uh oh,something went wrong");
+  //     }
 
-      firebase.getLists((lists) => {
-        this.setState({ lists, user }, () => {
-          this.setState({ loading: false });
-        });
-      });
+  //     firebase.getLists((lists) => {
+  //       this.setState({ lists, user }, () => {
+  //         this.setState({ loading: false });
+  //       });
+  //     });
 
-      this.setState({ user });
-    });
-  }
-  componentWillUnmount() {
-    firebase.detach();
-  }
+  //     this.setState({ user });
+  //   });
+  // }
+  // componentWillUnmount() {
+  //   firebase.detach();
+  // }
 
   toggleAddTodoModal() {
     this.setState({ addTodoVisible: !this.state.addTodoVisible });
@@ -50,26 +50,26 @@ export default class App extends React.Component {
   };
 
   addList = (list) => {
-    // this.setState({
-    //   lists: [
-    //     ...this.state.lists,
-    //     { ...list, id: this.state.lists.length + 1, todos: [] },
-    //   ],
-    // });
-    firebase.addlist({
-      name: list.name,
-      color: list.color,
-      todos: [],
+    this.setState({
+      lists: [
+        ...this.state.lists,
+        { ...list, id: this.state.lists.length + 1, todos: [] },
+      ],
     });
+    // firebase.addlist({
+    //   name: list.name,
+    //   color: list.color,
+    //   todos: [],
+    // });
   };
 
   updateList = (list) => {
-    // this.setState({
-    //   lists: this.state.lists.map((item) => {
-    //     return item.id === list.id ? list : item;
-    //   }),
-    // });
-    firebase.updateList(list);
+    this.setState({
+      lists: this.state.lists.map((item) => {
+        return item.id === list.id ? list : item;
+      }),
+    });
+    // firebase.updateList(list);
   };
 
   render() {
@@ -92,9 +92,10 @@ export default class App extends React.Component {
             addList={this.addList}
           />
         </Modal>
-        <View>
+
+        {/* <View>
           <Text>User:{this.state.user.uid} </Text>
-        </View>
+        </View> */}
         <View style={{ flexDirection: "row" }}>
           <View style={styles.divider} />
           <Text style={styles.title}>
@@ -113,6 +114,7 @@ export default class App extends React.Component {
           </TouchableOpacity>
           <Text style={styles.add}>Add List</Text>
         </View>
+
         <View style={{ height: 275, paddingLeft: 32 }}>
           <FlatList
             data={this.state.lists}

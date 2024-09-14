@@ -52,7 +52,7 @@ export default class AddListModal extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView style={styles.container} behavior="height">
         <TouchableOpacity
           style={{ position: "absolute", top: 24, right: 32 }}
           onPress={this.props.closeModal}
