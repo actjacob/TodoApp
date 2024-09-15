@@ -6,7 +6,7 @@
 // import { doc } from "@react-native-firebase/firestore";
 
 // const firebaseConfig = {
-//   apiKey: "AIzaSyA9xl6NBNcirYbYEnVbnLYUSerD37lAnkk",
+//   apiKey: "",
 //   authDomain: "todoapp-39c94.firebaseapp.com",
 //   databaseURL: "https://todoapp-39c94-default-rtdb.firebaseio.com",
 //   projectId: "todoapp-39c94",
