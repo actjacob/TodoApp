@@ -17,7 +17,7 @@ import AddListModal from "./components/AddListModal";
 
 const STORAGE_KEY = "@todo_lists";
 
-const App = () => {
+const MyComponent = () => {
   const [lists, setLists] = useState([]);
   const [addTodoVisible, setAddTodoVisible] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -36,8 +36,10 @@ const App = () => {
         setLoading(false);
       }
     };
+
     fetchLists();
   }, []);
+
   const saveLists = async (newLists) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newLists));
@@ -50,9 +52,9 @@ const App = () => {
     setAddTodoVisible((prevState) => !prevState);
   };
 
-  const renderList = ({ item }) => {
-    return <TodoList list={item} updateList={updateList} />;
-  };
+  const renderList = ({ item }) => (
+    <TodoList list={item} updateList={updateList} />
+  );
 
   const addList = (list) => {
     const updatedLists = [
@@ -70,6 +72,7 @@ const App = () => {
     setLists(updatedLists);
     saveLists(updatedLists);
   };
+
   if (loading) {
     return (
       <View style={styles.container}>
@@ -87,18 +90,19 @@ const App = () => {
       >
         <AddListModal closeModal={toggleAddTodoModal} addList={addList} />
       </Modal>
+
       <View style={{ flexDirection: "row" }}>
         <View style={styles.divider} />
         <Text style={styles.title}>
           Todo
-          <Text style={{ fontWeight: "300", color: colors.blue }}>Lists</Text>
+          <Text style={{ fontWeight: "300", color: colors.blue }}> Lists</Text>
         </Text>
-
         <View style={styles.divider} />
       </View>
+
       <View style={{ marginVertical: 48 }}>
         <TouchableOpacity style={styles.addList} onPress={toggleAddTodoModal}>
-          <AntDesign name="plus" size={16} color={colors.blue}></AntDesign>
+          <AntDesign name="plus" size={16} color={colors.blue} />
         </TouchableOpacity>
         <Text style={styles.add}>Add List</Text>
       </View>
@@ -107,7 +111,7 @@ const App = () => {
         <FlatList
           data={lists}
           keyExtractor={(item) => item.id.toString()}
-          horizontal={true}
+          horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={renderList}
           keyboardShouldPersistTaps="always"
@@ -116,8 +120,6 @@ const App = () => {
     </View>
   );
 };
-
-export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -153,3 +155,5 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 });
+
+export default MyComponent;
